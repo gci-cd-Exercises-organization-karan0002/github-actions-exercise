@@ -1,14 +1,16 @@
+# Note to skip workflow run, we can use 'git commit -m "commit-message [skip ci]"'
+# forked repo pull request will require first time approval for workflow to run
 name: Deployment Exercise 1
 # on: [push, workflow_dispatch]
 on:
   pull_request: #trigger 1, event
     types: [opened, edited] # "event activity types" of pull request "event"
-    branches:
+    branches: # only run when following branches changed, filters
       - master # main
       - "dev-*" # dev-new dev-this-is-new
       - "feat/**" # feat/new feat/new/button
   workflow_dispatch: #trigger 2, event
-  push:
+  push: # event
     branches:
       - master # main
       - "dev-*" # dev-new dev-this-is-new

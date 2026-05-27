@@ -7,7 +7,7 @@ on:
     branches:
       - master
 jobs:
-  test:
+  test: #runner
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -37,7 +37,7 @@ jobs:
         with:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} #hashFiles creates unique hash value based on combination of files contents
-          # if above key changes, we will reinstall dependencies
+          # if above key changes, then reinstall dependencies following:
       - name: Install dependencies
         run: npm ci
       - name: Build website

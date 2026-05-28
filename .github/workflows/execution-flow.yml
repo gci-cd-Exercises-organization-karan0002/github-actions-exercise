@@ -36,6 +36,7 @@ jobs:
         id: run-tests
         run: npm run test
       - name: Upload test report
+        # always(), success(), cancelled()
         if: failure() && steps.run-tests.outcome == 'failure' # must add failure() function otherwise previous step failure will hang execution
         uses: actions/upload-artifact@v4
         with:
@@ -75,3 +76,11 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+  report:
+    if: failure() # if any other job failed then run this job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Information
+        run: |
+          echo "something went wrong"
+          echo "${{ github }}"

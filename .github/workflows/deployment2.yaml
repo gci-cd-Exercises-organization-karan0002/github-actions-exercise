@@ -1,4 +1,4 @@
-name: Deployment Exercise 1
+name: Deployment Exercise 1 with env 
 on: push
 env: # env variable on workflow level
   MONGODB_DB_NAME: gha-demo

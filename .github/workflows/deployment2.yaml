@@ -33,7 +33,7 @@ jobs:
       - name: Test code
         run: npm run test
       - name: Echo from environment
-        run: "ENV From repository environment `testing` and not from repository secrets: ${{ secrets.POSTGRESQL_DB }}"
+        run: "ENV From repository environment - testing and not from repository secrets: ${{ secrets.POSTGRESQL_DB }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest

@@ -1,6 +1,6 @@
 name: Deployment Exercise 1 with env
 on: [push, workflow_dispatch]
-env: # env variable on workflow level
+env: # env variables on workflow level
   MONGODB_DB_NAME: gha-demo
   MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }} #repository secret # Stored in github secrets(in settings of repository),
   # cannot echo it, github secret policy
@@ -11,7 +11,7 @@ jobs:
     #   MONGODB_DB_NAME: xyz
     #   PORT: 4000
     runs-on: ubuntu-latest
-    env: # env variable on workflow level
+    env: # env variables on job level
       MONGODB_DB_NAME: gha-demo
       MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
     steps:
@@ -35,7 +35,7 @@ jobs:
       - name: Echo from environment
         run:
           echo "secrets From repository environment - testing and not from repository secret- ${{ secrets.POSTGRESQL_DB }}"
-          #check settings of repository on github
+          #check settings of repository on github, in that click environment tab
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -47,4 +47,4 @@ jobs:
       - name: Build code
         run: npm run build
       - name: Deploy code
-        run: echo "Deploying..., DB ${{ env.MONGODB_DB_NAME }} or $MONGODB_DB_NAME "
+        run: echo "Deploying..., DB ${{ env.MONGODB_DB_NAME }} or $MONGODB_DB_NAME"

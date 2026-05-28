@@ -77,6 +77,7 @@ jobs:
       - name: Deploy
         run: echo "Deploying..."
   report:
+  needs: [lint,deploy] # without this, any other job failure will cause concurrent run of this job
     if: failure() # if any other job failed then run this job
     runs-on: ubuntu-latest
     steps:

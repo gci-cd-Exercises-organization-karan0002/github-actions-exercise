@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 # if you don't mention which repository to checkout, it will fetch this one
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
@@ -24,7 +24,7 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
-  build:
+  build: # runner
     needs: test
     runs-on: ubuntu-latest
     outputs:
@@ -46,7 +46,7 @@ jobs:
         id: publish # helps access data
         run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';' # linux-command: outputs the file name of js file
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4 # action
+        uses: actions/upload-artifact@v4 # action, can be downloaded from different workflows and different jobs
         with:
           name: dist-files #identifier
           path: dist
@@ -54,7 +54,7 @@ jobs:
           #   dist
           #   package.json
           # !path/**/*.tmp  - exclude
-  deploy: # this job runs on different machine
+  deploy: # runner, this job runs on different machine
     needs: build # runs after 'build' job
     runs-on: ubuntu-latest
     steps:

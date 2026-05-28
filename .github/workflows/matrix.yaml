@@ -13,7 +13,7 @@ jobs:
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }} # run all jobs in parallel with all combinations of node-version and operating-system
       - name: Install dependencies
         run: npm ci
       - name: Build project

@@ -9,6 +9,7 @@ on:
       - dev
     paths:
       - "docker-project-separate/**"
+  workflow_dispatch: tur
 
 env:
   CACHE_KEY: node-deps
@@ -57,14 +58,14 @@ jobs:
       - name: Output information
         run: |
           echo "MONGODB_USERNAME: $MONGODB_USERNAME"
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Output information
-        env:
-          PORT: 3000
-        run: |
-          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
-          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
-          echo "${{ env.PORT }}"
+  # deploy:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Output information
+  #       env:
+  #         PORT: 3000
+  #       run: |
+  #         echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+  #         echo "MONGODB_USERNAME: $MONGODB_USERNAME"
+  #         echo "${{ env.PORT }}"

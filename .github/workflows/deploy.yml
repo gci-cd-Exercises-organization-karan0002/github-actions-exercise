@@ -11,9 +11,9 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container: # docker container, this job will run in container
-      image: node:16
-      # env:
+    # container: # docker container, this job will run in container
+    #   image: node:16
+    #   # env:
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: smmqkda.mongodb.net

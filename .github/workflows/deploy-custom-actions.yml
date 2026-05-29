@@ -75,7 +75,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Must provide for docker action also
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Must provide for docker action also
         with:
-          bucket: s3-bucket-name-01
+          bucket: github-actions-test-001
           dist-folder: custom-action-project/dist
           # bucket-region: us-east-02
         # run: echo "Deploying..."

@@ -2,20 +2,22 @@ name: Deployment Custom Actions
 on:
   push:
     branches:
-      - master
-
-defaults:
-  run:
-    working-directory: custom-action-project
-
+      - main
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
-        uses: actions/checkout@v3 # code first must be fetched, so do not move this to custom actions
-      - name: Load & cache dependencies
-        uses: ./.github/actions/caches-deps # also can reference directly from github repo eg. Karan02/custom-action-1
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
       - name: Lint code
         run: npm run lint
   test:
@@ -23,14 +25,21 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Load & cache dependencies
-        uses: ./.github/actions/caches-deps # also can reference directly from github repo eg. Karan02/custom-action-1
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
       - name: Test code
         id: run-tests
         run: npm run test
       - name: Upload test report
         if: failure() && steps.run-tests.outcome == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: test-report
           path: test.json
@@ -40,12 +49,19 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Load & cache dependencies
-        uses: ./.github/actions/caches-deps # also can reference directly from github repo eg. Karan02/custom-action-1
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
       - name: Build website
         run: npm run build
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: dist-files
           path: dist

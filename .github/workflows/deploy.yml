@@ -9,7 +9,7 @@ on:
       - dev
     paths:
       - "docker-project-separate/**"
-  workflow_dispatch: true
+  workflow_dispatch:
 
 env:
   CACHE_KEY: node-deps

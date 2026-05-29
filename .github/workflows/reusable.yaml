@@ -6,7 +6,7 @@ on:
         description: The name of the deployable artifact files
         required: true # if set false, then workflow canbe called without providing a value
         #if true, then value is needed
-        default: dist-files # we can set default value
+        default: dist # we can set default value
         type: string
 jobs:
   deploy:

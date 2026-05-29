@@ -71,7 +71,7 @@ jobs:
     needs: build
     uses: ./.github/workflows/reusable.yaml # using another workflow
     with:
-      artifact-name: "dist"
+      artifact-name: "dist-files"
   report:
     needs: [lint, deploy] # without this, any other job failure will cause concurrent run of this job
     if: failure() # if any other job failed then run this job

@@ -17,8 +17,6 @@ jobs:
         with:
           name: ${{ inputs.artifact-name }} #github actions expression
       - name: List files
-        with:
-      - name: List files
         run: ls
       - name: Output information
         run: echo "Deploying and uploading ..."

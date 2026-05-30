@@ -1,3 +1,6 @@
+# If you are using github actions, check for blue tick - github team verified actions
+# If not blue tick, then you can visit action repository code and check yourself
+
 name: Label Issues (Script Injection Example)
 on:
   issues:

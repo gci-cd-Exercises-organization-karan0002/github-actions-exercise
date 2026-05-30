@@ -55,7 +55,7 @@ jobs:
           name: dist-files
           path: custom-action-project/dist
   deploy:
-    permissions: # for OIDC connect
+    permissions: #permissions for OIDC connect
       id-token: write
       contents: read
     needs: build
@@ -70,11 +70,14 @@ jobs:
           path: dist-files # this is important when working with subdirectories
       - name: Output contents
         run: ls
-      #with OIDC(open ID connection) we do not need aws access key and access id manually, commented below
+      # https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws
+      # attached role S3FullAccess
+      # with OIDC(open ID connection) we do not need aws access key and access id manually, commented out below
+      # AWS -> IAM service -> Identity providers tab -> Add Provider
       - name: Get AWS permissions
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@v6 #action for AWS OIDC
         with:
-          role-to-assume: arn:aws:iam::905418281563:role/github-actions-demo-1 # arn
+          role-to-assume: arn:aws:iam::905418281563:role/github-actions-demo-1 # arn + s3 bucket (role)
           aws-region: ap-south-1
       - name: Deploy site
         id: deploy
@@ -83,8 +86,8 @@ jobs:
         # uses: ./.github/actions/deploy-s3-docker # python environment code, need to be studied
 
         # env:
-        #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Must provide for docker action also
-        #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Must provide for docker action also
+        #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Must provide for docker action
+        #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Must provide for docker action
         with:
           bucket: github-actions-test-001
           dist-folder: dist-files

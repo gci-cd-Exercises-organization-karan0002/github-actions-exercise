@@ -55,6 +55,9 @@ jobs:
           name: dist-files
           path: custom-action-project/dist
   deploy:
+    permissions: # for OIDC connect
+      id-token: write
+      contents: read
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -66,15 +69,22 @@ jobs:
           name: dist-files
           path: dist-files # this is important when working with subdirectories
       - name: Output contents
-        run: pwd
+        run: ls
+      #with OIDC(open ID connection) we do not need aws access key and access id manually, commented below
+      - name: Get AWS permissions
+        uses: aws-actions/configure-aws-credentials
+        with:
+          role-to-assume: arn:aws:iam::905418281563:role/github-actions-demo-1 # arn
+          aws-region-1: ap-south-1
       - name: Deploy site
         id: deploy
         uses: ./.github/actions/deploy-s3-javascript
         # OR
         # uses: ./.github/actions/deploy-s3-docker # python environment code, need to be studied
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Must provide for docker action also
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Must provide for docker action also
+
+        # env:
+        #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Must provide for docker action also
+        #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Must provide for docker action also
         with:
           bucket: github-actions-test-001
           dist-folder: dist-files

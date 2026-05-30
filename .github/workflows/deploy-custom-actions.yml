@@ -75,7 +75,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::905418281563:role/github-actions-demo-1 # arn
-          aws-region-1: ap-south-1
+          aws-region: ap-south-1
       - name: Deploy site
         id: deploy
         uses: ./.github/actions/deploy-s3-javascript

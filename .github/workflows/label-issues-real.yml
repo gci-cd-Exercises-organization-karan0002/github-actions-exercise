@@ -6,8 +6,8 @@ on:
 
 jobs:
   assign-label: # job name
-    permissions: # by default, only read permissions are assigned
-      issues: write
+    permissions: # by default, only read permissions are assigned, check documentation for more permissions
+      issues: write # repository --> settings --> Action tab --> scroll to bottom, for giving permissions from UI
     runs-on: ubuntu-latest
     steps:
       - name: Assign label

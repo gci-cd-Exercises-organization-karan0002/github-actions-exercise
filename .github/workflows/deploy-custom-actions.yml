@@ -73,7 +73,7 @@ jobs:
       # Recommended OIDC vs Direct AWS Access Key/ID access
       # https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws
       # attached role S3FullAccess
-      # with OIDC(open ID connection) we do not need aws access key and access id manually, commented out below
+      # with recommended OIDC(open ID connection) we do not need aws access key and access id manually, commented out below
       # AWS -> IAM service -> Identity providers tab -> Add Provider
       - name: Get AWS permissions
         uses: aws-actions/configure-aws-credentials@v6 #action for AWS OIDC

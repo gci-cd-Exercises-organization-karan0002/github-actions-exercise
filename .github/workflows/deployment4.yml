@@ -7,7 +7,7 @@ on:
     branches:
       - master
 jobs:
-  test: #runner
+  test: #runs on runner, job
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -24,7 +24,7 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
-  build: # runner
+  build: #runs on runner, job
     needs: test
     runs-on: ubuntu-latest
     outputs:

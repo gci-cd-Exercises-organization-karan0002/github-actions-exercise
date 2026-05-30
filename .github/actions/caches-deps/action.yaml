@@ -27,4 +27,4 @@ runs:
       run: |
         npm ci
         echo "::set-output name=cache::'${{ inputs.caching }}'"
-      shell: bash # for custom actions add shell
+      shell: bash # for custom actions add shell field

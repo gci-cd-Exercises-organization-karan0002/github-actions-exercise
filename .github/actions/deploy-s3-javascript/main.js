@@ -12,12 +12,12 @@ async function run() {
   // 2) Upload files
   // exec.exec('aws s3 sync <local-folder> <s3-bucket>')
   const s3Uri = `s3://${bucket}`
-  const process = require('process');
+//   const process = require('process');
 
-console.log('cwd:', process.cwd());
+// console.log('cwd:', process.cwd());
 
-await exec.exec('pwd');
-await exec.exec('find', ['.', '-maxdepth', '2', '-type', 'd']);
+// await exec.exec('pwd');
+// await exec.exec('find', ['.', '-maxdepth', '2', '-type', 'd']);
   exec.exec(`aws s3 sync ${distFolder} ${s3Uri} --region ${bucketRegion}`)
 
   const websiteUrl = `http://${bucket}.s3-website.${bucketRegion}.amazonaws.com`

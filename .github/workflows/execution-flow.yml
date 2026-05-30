@@ -45,7 +45,7 @@ jobs:
         run: npm run test
       - name: Upload test report
         # always(), success(), cancelled()
-        if: failure() && steps.run-tests.outcome == 'failure' # must add failure() function otherwise previous step failure will hang execution
+        if: failure() && steps.run-tests.outcome == 'failure' # must add failure() function otherwise previous step failure will hang execution flow
         uses: actions/upload-artifact@v4
         with:
           name: test-report

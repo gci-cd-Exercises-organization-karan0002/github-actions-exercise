@@ -4,11 +4,10 @@ on:
     types:
       - opened
 
-permissions:
-  issues: write
-
 jobs:
-  assign-label:
+  assign-label: # job name
+    permissions: # by default, only read permissions are assigned
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Assign label
@@ -21,3 +20,4 @@ jobs:
           -d '{
               "labels": ["bug"]
             }' \
+          --fail

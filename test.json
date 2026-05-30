@@ -8,7 +8,7 @@
   "numFailedTests": 0,
   "numPendingTests": 0,
   "numTodoTests": 0,
-  "startTime": 1780129682310,
+  "startTime": 1780129897899,
   "success": true,
   "testResults": [
     {
@@ -21,7 +21,7 @@
           "fullName": " My Content should render a button",
           "status": "passed",
           "title": "should render a button",
-          "duration": 30,
+          "duration": 45,
           "failureMessages": []
         },
         {
@@ -32,12 +32,12 @@
           "fullName": " My Content should show the help area after clicking the button",
           "status": "passed",
           "title": "should show the help area after clicking the button",
-          "duration": 42,
+          "duration": 70,
           "failureMessages": []
         }
       ],
-      "startTime": 1780129684505,
-      "endTime": 1780129684577,
+      "startTime": 1780129900860,
+      "endTime": 1780129900975,
       "status": "passed",
       "message": "",
       "name": "C:/Users/Karan/Downloads/04+Practice+Project+(Start)/04+Practice+Project+(Start)/src/components/MainContent.test.jsx"
